@@ -1,6 +1,21 @@
+import { ButtonHTMLAttributes } from "react"
 
-export const Button = ({ children }) => {
-    return <button className="bg-black text-white w-96 border border-gray-700 rounded-lg p-2 mt-4">
-        {children}
-    </button>
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    variant?: "primary" | "secondary"
+}
+
+const baseClasses = "py-2 px-4 rounded transition duration-200"
+
+const variantClasses = {
+    primary: "bg-white text-black hover:bg-zinc-200",
+    secondary: "bg-zinc-800 text-white hover:bg-zinc-700",
+}
+
+export const Button = ({ children, variant = "primary", className = "", ...props }: ButtonProps) => {
+
+    return (
+        <button className={`${baseClasses} ${variantClasses[variant]} ${className}`} {...props}>
+            {children}
+        </button>
+    )
 }
